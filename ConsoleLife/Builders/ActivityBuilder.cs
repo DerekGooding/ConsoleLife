@@ -16,7 +16,6 @@ public static class ActivityBuilder
         public Activity Instant();
     }
 
-
     public class Builder() : ISetName, ISetCompletionTime
     {
         private readonly Activity _activity = new();
