@@ -79,5 +79,4 @@ public class DataIntegrityTests
 
         Assert.AreEqual(expect, actual);
     }
-
 }
