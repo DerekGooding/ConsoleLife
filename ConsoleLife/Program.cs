@@ -8,6 +8,8 @@ public static class Program
     {
         Game game = new();
 
+        game.Start();
+
 
     }
 }

@@ -9,4 +9,6 @@ internal class Person
     public List<Activity> Plan { get; } = [];
 
     public StatBlock StatBlock { get; } = new();
+
+    public Inventory Inventory { get; } = new();
 }

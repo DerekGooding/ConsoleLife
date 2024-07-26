@@ -10,13 +10,13 @@ internal class StatBlock
         Current = x.StartingValue,
         Max = x.IsConsumable ? x.StartingValue : null,
     })];
-}
 
-internal struct AttributeHolder
-{
-    public Attribute Attribute { get; set; }
-    public int Current { get; set; }
-    public int? Max { get; set; }
+    internal struct AttributeHolder
+    {
+        public Attribute Attribute { get; set; }
+        public int Current { get; set; }
+        public int? Max { get; set; }
 
-    public readonly bool IsConsumable => Max != null;
+        public readonly bool IsConsumable => Max != null;
+    }
 }

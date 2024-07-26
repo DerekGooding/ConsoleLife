@@ -17,6 +17,12 @@ public class DataIntegrityTests
             yield return new object[] { item };
     }
 
+    public static IEnumerable<object[]> ItemNamesData()
+    {
+        foreach (var item in Enum.GetValues(typeof(ItemNames)))
+            yield return new object[] { item };
+    }
+
     [DataTestMethod]
     [DynamicData(nameof(AttributeNamesData), DynamicDataSourceType.Method)]
     [TestMethod]
@@ -37,6 +43,16 @@ public class DataIntegrityTests
         Assert.AreEqual(expect, item.ToString());
     }
 
+    [DataTestMethod]
+    [DynamicData(nameof(ItemNamesData), DynamicDataSourceType.Method)]
+    [TestMethod]
+    public void Item_Enum_ShouldPairWithPrewarm(ItemNames item)
+    {
+        var expect = Items.PreWarm[(int)item].Name;
+
+        Assert.AreEqual(expect, item.ToString());
+    }
+
     [TestMethod]
     public void Attribute_Enum_ShouldHaveSameLength()
     {
@@ -51,6 +67,15 @@ public class DataIntegrityTests
     {
         var expect = Enum.GetValues(typeof(ActivityNames)).Length;
         var actual = Activities.PreWarm.Count;
+
+        Assert.AreEqual(expect, actual);
+    }
+
+    [TestMethod]
+    public void Item_Enum_ShouldHaveSameLength()
+    {
+        var expect = Enum.GetValues(typeof(ItemNames)).Length;
+        var actual = Items.PreWarm.Count;
 
         Assert.AreEqual(expect, actual);
     }
