@@ -1,4 +1,5 @@
 using ConsoleLife.Model.Menu;
+using Moq;
 
 namespace ConsoleLife.Test;
 
@@ -34,8 +35,14 @@ public class MenuTests
     [TestMethod]
     public void Menu_Should_InvokeChoice()
     {
-        Menu menu = new();
+        var mockService = new Mock<Action>();
+        var myClass = new Action(mockService.Object);
+        Action action = new(() => { });
+        MenuOption menuOption = new("1", "Open Door", myClass);
 
+        menuOption.Invoke();
+
+        mockService.Verify(service => service.Invoke(), Times.Once);
     }
 
     [TestMethod]
