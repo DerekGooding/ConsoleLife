@@ -4,14 +4,35 @@ namespace ConsoleLife.Builders;
 
 public static class ActivityBuilder
 {
-    public static Activity SetName(string name) => new Builder().SetName(name);
-    public class Builder()
+    public static ISetCompletionTime Name(string name) => new Builder().Name(name);
+
+    public interface ISetName
     {
-        private Activity _activity = new();
-        public Activity SetName(string name)
+        public ISetCompletionTime Name(string name);
+    }
+    public interface ISetCompletionTime
+    {
+        public Activity CompletionTime(int timeInSeconds);
+        public Activity Instant();
+    }
+
+
+    public class Builder() : ISetName, ISetCompletionTime
+    {
+        private readonly Activity _activity = new();
+
+        public Activity Instant() => _activity;
+
+        public Activity CompletionTime(int timeInSeconds)
+        {
+            _activity.SecondsToComplete = timeInSeconds;
+            return _activity;
+        }
+
+        public ISetCompletionTime Name(string name)
         {
             _activity.Name = name;
-            return _activity;
+            return this;
         }
     }
 }

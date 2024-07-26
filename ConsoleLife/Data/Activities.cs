@@ -7,6 +7,7 @@ public static class Activities
 {
     public static List<Activity> PreWarm =>
     [
-        SetName("Idle"),
+        Name("Idle").Instant(),
+        Name("Explore").CompletionTime(5),
     ];
 }
